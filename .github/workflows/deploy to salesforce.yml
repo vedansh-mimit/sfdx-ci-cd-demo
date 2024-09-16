@@ -22,8 +22,12 @@ jobs:
 
       - name: Deploy using mdapi
         run: |
-          echo -e ${{ secrets.SERVER_KEY }} > ./server.key
-          cat ./server.key
-          sfdx auth:jwt:grant -i ${{ secrets.CLIENT_ID }} -f ./server.key --username ${{ secrets.USERNAME }} -r https://login.salesforce.com
-          sfdx force:source:convert -d mdapi_output_dir
-          sfdx force:mdapi:deploy -d mdapi_output_dir/ -u ${{ secrets.USERNAME }} -l RunSpecifiedTests --runtests "${{ secrets.TEST_CLASSES }}" -w -1
+          echo ${{ secrets.SERVER_KEY }}
+          echo ${{ secrets.CLIENT_ID }}
+          echo ${{ secrets.USERNAME }}
+          echo ${{ secrets.TEST_CLASSES }}
+          # echo -e ${{ secrets.SERVER_KEY }} > ./server.key
+          # cat ./server.key
+          # sfdx auth:jwt:grant -i ${{ secrets.CLIENT_ID }} -f ./server.key --username ${{ secrets.USERNAME }} -r https://login.salesforce.com
+          # sfdx force:source:convert -d mdapi_output_dir
+          # sfdx force:mdapi:deploy -d mdapi_output_dir/ -u ${{ secrets.USERNAME }} -l RunSpecifiedTests --runtests "${{ secrets.TEST_CLASSES }}" -w -1
