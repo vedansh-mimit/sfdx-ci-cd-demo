@@ -7,27 +7,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  echo-secrets:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4.0.3
-
-      - name: Install sfdx cli
-        run: sudo npm install @salesforce/cli --global
-
-      - name: Deploy using mdapi
-        run: |
-          echo ${{ secrets.SERVER_KEY }}
-          echo ${{ secrets.CLIENT_ID }}
-          echo ${{ secrets.USERNAME }}
-          echo ${{ secrets.TEST_CLASSES }}
-          # echo -e ${{ secrets.SERVER_KEY }} > ./server.key
-          # cat ./server.key
-          # sfdx auth:jwt:grant -i ${{ secrets.CLIENT_ID }} -f ./server.key --username ${{ secrets.USERNAME }} -r https://login.salesforce.com
-          # sfdx force:source:convert -d mdapi_output_dir
-          # sfdx force:mdapi:deploy -d mdapi_output_dir/ -u ${{ secrets.USERNAME }} -l RunSpecifiedTests --runtests "${{ secrets.TEST_CLASSES }}" -w -1
+    - name: Echo repository secrets
+      run: |
+        echo "Secret One: ${{ secrets.CLIENT_ID }}"
+        echo "Secret Two: ${{ secrets.SERVER_KEY }}"
+        echo "Secret Three: ${{ secrets.TEST_CLASSES }}"
+        echo "Secret Four: ${{ secrets.USERNAME }}"
